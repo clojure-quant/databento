@@ -2,8 +2,10 @@ import databento as db
 client = db.Historical()
 
 # Define parameters
-dataset = "EQUS.MINI"     
-start_date = "2023-03-28T00:00:00"  
+#dataset = "EQUS.MINI"     
+dataset = "XNYS.PILLAR"
+#start_date = "2023-03-28T00:00:00"  
+start_date = "2018-05-01T00:00:00"
 end_date =   "2026-01-29T22:00:00+00:00" 
 
 mapping = client.symbology.resolve(

@@ -22,6 +22,9 @@
 
 ds
 
+(def ds2018
+  (-> "csv/eod-market-2018.csv"
+      (load-dataset)))
 
 (defn filter-liquid-assets [ds min-turnover]
   (let [liquid-set   (-> ds
@@ -37,6 +40,8 @@ ds
 
 
 (def ds-liquid (filter-liquid-assets ds 1000000.0))
+
+(def ds-liquid-2018 (filter-liquid-assets ds2018 1000000.0))
 
 (tc/write! ds-liquid "liquid-stocks-bars.csv")
 
@@ -83,8 +88,13 @@ ds-liquid
 
 
 
+(-> ds-liquid-2018
+    (compute-signals {:window 300
+                      :dd -0.2
+                      :dd-n-min 120})
+    (tc/write! "signals2018.csv"))
 
-
+(+ 5 5)
 
 
    
