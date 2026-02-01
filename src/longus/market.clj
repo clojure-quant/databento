@@ -5,6 +5,7 @@
    [tech.v3.datatype.functional :as dfn]
    [tech.v3.datatype.rolling :as rolling]
    [longus.prices :refer [add-future-prices]]
+   [longus.assets :refer [add-category]]
    ))
 
 (defn bars-since-high
@@ -71,6 +72,7 @@
           :signal (dfn/and setup (next-breakout-signal ds))
           :initial c3})
         (add-future-prices)
+        (add-category)
         
         )))
 
