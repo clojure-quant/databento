@@ -38,6 +38,8 @@ ds
 
 (def ds-liquid (filter-liquid-assets ds 1000000.0))
 
+(tc/write! ds-liquid "liquid-stocks-bars.csv")
+
 ds-liquid
 
 ;; 9000 stocks have less than 1 million usd average turnover.
