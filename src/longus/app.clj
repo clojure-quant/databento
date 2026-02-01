@@ -53,7 +53,9 @@ ds-liquid
     (tc/select-rows (fn [row]
                       (= (:asset row) "MSFT")))
     (add-trailing-decline-signal 100 -0.2 50)
-    (tc/select-rows #(:signal %)))
+    (tc/select-rows #(:signal %))
+    ;(tc/select-rows #(:setup %))
+    )
 
 (defn select-signal [ds]
   (tc/select-rows ds #(:signal %)))
@@ -61,25 +63,23 @@ ds-liquid
 
 (defn compute-signals
   "Apply add-trailing-decline-signal to each asset group."
-  [ds]
+  [ds {:keys [window dd dd-n-min]}]
   (->> (tc/group-by ds :asset)
        (tc/groups->seq)
        ;(take 2)
-       (pmap #(add-trailing-decline-signal (tc/as-regular-dataset %) 200 -0.2 90))
+       (pmap #(add-trailing-decline-signal (tc/as-regular-dataset %) window dd dd-n-min))
        (apply tc/concat)
        (select-signal)))
 
 
-
-
-(compute-signals ds)
-
-
 (-> ds-liquid
-    (compute-signals)
+    (compute-signals {:window 300 
+                      :dd -0.2
+                      :dd-n-min 120})
     (tc/write! "signals.csv"))
- 
- 
+
+
+(def bill-assets #{})
 
 
 

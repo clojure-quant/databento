@@ -48,23 +48,35 @@
                 :trailing-max-decline trailing-max-decline)))))
 
 
+(defn next-breakout-signal [ds]
+  (let [next-high (dfn/shift (:high ds) -1)   ;; shift UP (look forward)
+        ]
+    (dfn/> next-high (:trailing-high ds))
+    ))
+
 
 (defn add-trailing-decline-signal [bar-ds n max-decline min-n]
   (let [ds (add-trailing-decline bar-ds n)
-        {:keys [prct-decline trailing-ago trailing-max-decline]} ds
+        ds (tc/add-columns ds {:idx (range (tc/row-count ds))})
+        {:keys [idx prct-decline trailing-ago trailing-max-decline]} ds
         c1 (dfn/>  trailing-ago min-n)
         c2 (dfn/>  trailing-max-decline max-decline)
-        c3 (dfn/>  prct-decline -0.02)]
+        c3 (dfn/> idx 30)
+        setup (dfn/and c3 (dfn/and c1 c2))]
     (-> ds
-        (tc/add-column :signal  (dfn/and (dfn/and c1 c2) c3)))))
+        (tc/add-columns 
+         {:setup setup
+          :signal (dfn/and setup (next-breakout-signal ds))
+          :initial c3}
+         ))))
 
 
 
 
-(comment
-  (bars-since-high 6 [0 1 2 1 0 1])
-  ((partial bars-since-high 6)  [0 1 2 1 0 1])
-  (split-high-ago [[1 2] [3 4] [4 6]]))
+  (comment
+    (bars-since-high 6 [0 1 2 1 0 1])
+    ((partial bars-since-high 6)  [0 1 2 1 0 1])
+    (split-high-ago [[1 2] [3 4] [4 6]]))
 
 
 
