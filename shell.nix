@@ -46,9 +46,23 @@ let
 
 in
 pkgs.mkShell {
-  packages = [ pyEnv ];
+  packages = [ pyEnv
+               pkgs.nodejs_24   # ⭐ Node.js for gemini-cli
+               pkgs.gemini-cli
+           ];
 
   shellHook = ''
     echo "✅ Pure nix Databento environment ready"
+    export NPM_PREFIX=$PWD/.npm-global
+    export PATH=$NPM_PREFIX/bin:$PATH
+
+    mkdir -p $NPM_PREFIX
+
+    if ! command -v gemini >/dev/null; then
+      echo "Installing @google/gemini-cli locally..."
+      npm install @google/gemini-cli
+      ln -sf $PWD/node_modules/.bin/gemini $NPM_PREFIX/bin/gemini
+    fi
+
   '';
 }

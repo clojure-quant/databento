@@ -17,4 +17,3 @@ export DATABENTO_API_KEY="db-xxxxxxxxxxxxxxxx"
 'status', Trading session updates like halts, pauses, and short-selling restrictions.
 'imbalance', 
 'cmbp-1', 'cbbo-1s', 'cbbo-1m', 'tcbbo', 
-

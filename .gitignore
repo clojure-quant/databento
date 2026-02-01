@@ -1,4 +1,6 @@
 .cpcache/
 .nrepl-port
 .calva/
+node_modules/
+.npm-global/
 csv/

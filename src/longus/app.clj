@@ -75,13 +75,13 @@ ds-liquid
 
 
 (-> ds-liquid
-    (compute-signals {:window 300 
+    (compute-signals {:window 300
                       :dd -0.2
                       :dd-n-min 120})
     (tc/write! "signals.csv"))
 
 
-(def bill-assets #{})
+
 
 
 

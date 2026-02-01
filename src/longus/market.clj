@@ -3,7 +3,9 @@
    [tablecloth.api :as tc]
    [tech.v3.dataset :as ds]
    [tech.v3.datatype.functional :as dfn]
-   [tech.v3.datatype.rolling :as rolling]))
+   [tech.v3.datatype.rolling :as rolling]
+   [longus.prices :refer [add-future-prices]]
+   ))
 
 (defn bars-since-high
   "Returns [high bars-since-high] for the last element.
@@ -67,8 +69,10 @@
         (tc/add-columns 
          {:setup setup
           :signal (dfn/and setup (next-breakout-signal ds))
-          :initial c3}
-         ))))
+          :initial c3})
+        (add-future-prices)
+        
+        )))
 
 
 

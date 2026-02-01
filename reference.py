@@ -10,7 +10,8 @@ defs = client.security_master.get_range(
     countries=["US"],
     symbols="ALL_SYMBOLS",
     #,start=start_date, end=end_date
-    start="2026-01-29"
+    end="2026-01-25",
+    start="2026-01-20"
     )
 
 # Convert to DataFrame
@@ -19,3 +20,6 @@ df_defs.to_csv("eod-market-defs.csv", index=True)
 
 
 print(defs.head(10))
+
+
+# THIS SCRIPT NEEDS LIVE SUBSCRIPTION
