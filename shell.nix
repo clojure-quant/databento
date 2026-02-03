@@ -44,11 +44,16 @@ let
     databento
   ]);
 
+  oldPkgs = import (builtins.fetchTarball {
+   url = "https://github.com/NixOS/nixpkgs/archive/44c64ea5d7d1ce931e616313de11ac171dbd6a40.tar.gz";
+  }) { system = pkgs.system; };
+
 in
 pkgs.mkShell {
   packages = [ pyEnv
                pkgs.nodejs_24   # ⭐ Node.js for gemini-cli
                pkgs.gemini-cli
+               oldPkgs.duckdb.lib
            ];
 
   shellHook = ''
@@ -63,6 +68,11 @@ pkgs.mkShell {
       npm install @google/gemini-cli
       ln -sf $PWD/node_modules/.bin/gemini $NPM_PREFIX/bin/gemini
     fi
+
+    export DUCKDB_LIB_DIR=${oldPkgs.duckdb.lib}/lib
+    export LD_LIBRARY_PATH=${oldPkgs.duckdb.lib}/lib:$LD_LIBRARY_PATH
+    echo "DuckDB lib at $DUCKDB_LIB_DIR"
+    echo "DuckDB shared lib: $DUCKDB_LIB_DIR/libduckdb.so"
 
   '';
 }
