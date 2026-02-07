@@ -31,6 +31,6 @@
 
 (-> (load-dataset "signals2018.csv")
     (tc/map-columns :pl [:px0 :px5 :px10 :px20 :px40] exit-pl)
-    (tc/write! "2018-pl.csv")
+    (tc/write! "2018-pl2.csv")
     )
 

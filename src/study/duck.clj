@@ -1,4 +1,4 @@
-(ns longus.duck
+(ns study.duck
    (:require
     [tick.core :as t]
     [tablecloth.api :as tc]
@@ -27,7 +27,7 @@
  (defn string-date-to-instant [s]
    (t/instant (str (subs s 0 10) "T00:00:00+00:00")))
 
- (string-date-to-instant "2026-01-29 00:00:00+00:00")
+ ;(string-date-to-instant "2026-01-29 00:00:00+00:00")
 
  (defn- ensure-date-instant
    "duckdb needs one fixed type for the :date column.

@@ -1,12 +1,11 @@
-(ns longus.app
+(ns study.app
   (:require
-   [longus.market :refer [add-trailing-decline add-trailing-decline-signal]]
    [tablecloth.api :as tc]
    [tech.v3.dataset :as ds]
    [tech.v3.datatype.functional :as dfn]
    [tech.v3.datatype.rolling :as rolling]
-   [longus.bento-loader :refer [ds ds2018 ds-liquid ds-liquid-2018]]
-   ))
+   [indicator.decline :refer [add-trailing-decline add-trailing-decline-signal]]
+   [data.bento :refer [ds ds2018 ds-liquid ds-liquid-2018]]))
 
 
 (-> ds
@@ -25,7 +24,6 @@
 
 (defn select-signal [ds]
   (tc/select-rows ds #(:signal %)))
-
 
 (defn compute-signals
   "Apply add-trailing-decline-signal to each asset group."
@@ -53,7 +51,7 @@
                       :dd-n-min 120})
     (tc/write! "signals2018.csv"))
 
-(+ 5 5)
+
 
 
    

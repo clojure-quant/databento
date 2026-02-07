@@ -1,4 +1,4 @@
-(ns longus.assets
+(ns data.assets
   (:require
    [tablecloth.api :as tc]
    [tech.v3.dataset :as ds]

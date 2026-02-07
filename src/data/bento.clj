@@ -1,4 +1,4 @@
-(ns longus.bento-loader
+(ns data.bento
   (:require
    [tablecloth.api :as tc]
    [tech.v3.dataset :as ds]

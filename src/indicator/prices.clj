@@ -1,4 +1,4 @@
-(ns longus.prices
+(ns indicator.prices
   (:require
    [tech.v3.datatype :as dtype]
    [tech.v3.datatype.functional :as dfn]
