@@ -7,7 +7,7 @@
   increasing
 - trade retests.
 - exclude real estate investment trusts.
-
+- laengeres high weit nach oben, oder nicht existent.
 
 python download.py
 
