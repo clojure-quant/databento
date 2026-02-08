@@ -1,5 +1,13 @@
 
 
+# high-breakout 
+
+- skip first 200 days; high not relevant
+- min-bars-before-high: time confirms the high; otherwise it could still be 
+  increasing
+- trade retests.
+- exclude real estate investment trusts.
+
 
 python download.py
 
